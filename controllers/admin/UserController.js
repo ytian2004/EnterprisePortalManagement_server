@@ -6,7 +6,7 @@ const UserController = {
     login: async (req, res) => {
         // req.body
 
-        console.log(req.body) // 打印请求体数据
+        // console.log(req.body) // 打印请求体数据
 
         var result = await UserService.login(req.body) // 调用用户服务的login方法，传入请求体数据进行用户验证
         if (result.length === 0) {
