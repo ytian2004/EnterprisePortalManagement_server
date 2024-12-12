@@ -3,18 +3,18 @@ const NewsService = require("../../services/admin/NewsService")
 
 const NewsController = {
     add: async (req,res)=>{
-        const cover = req.cover ? `/newsuploads/${req.file.filename}`:""
+        const cover = req.file ? `/newsuploads/${req.file.filename}`:""
         const {title,content,category,isPublish} = req.body
         await NewsService.add({
-            title,content,
+            title,
+            content,
             category:Number(category),
             isPublish:Number(isPublish),
-            cover,
+            cover:cover,
             editTime: new Date()
         })
         res.send({
             AcitonType: "OK"
-
         })
 
     },
@@ -37,11 +37,10 @@ const NewsController = {
     },
     getList: async (req,res)=>{
 
-        const data = await NewsService.getList({_id:req.params.id})
-
+        const result = await NewsService.getList({_id:req.params.id})
         res.send({
             AcitonType: "OK",
-            data: data
+            data: result
         })
     },
     publish: async (req,res)=>{
